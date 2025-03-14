@@ -62,7 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Our brand colors
+				brand: {
+					green: '#3A9B55',
+					orange: '#FF8C42',
+					brown: '#8B4513',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
