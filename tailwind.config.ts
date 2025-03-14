@@ -63,22 +63,22 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Brand colors updated for wood and finance theme
+				// Brand colors updated for finance theme
 				brand: {
-					green: '#495235',
-					orange: '#DA983C',
-					brown: '#90533B',
+					green: '#2E7D32',
+					orange: '#F57C00',
+					brown: '#795548',
 				},
 				// Finance education colors
 				finance: {
-					yellow: '#F4DDB8',
-					brown: '#90533B',
-					orange: '#DA983C',
-					green: '#495235',
-					coral: '#B87B5C',
-					sage: '#8F9562',
+					yellow: '#FFA000',
+					brown: '#795548',
+					orange: '#F57C00',
+					green: '#2E7D32',
+					coral: '#FF5722',
+					sage: '#4CAF50',
 				},
-				// New wood theme colors
+				// Wood theme colors
 				wood: {
 					light: '#E8D0B0',
 					medium: '#C8A279',
