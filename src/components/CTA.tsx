@@ -21,14 +21,14 @@ const CTA = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="rounded-full text-base h-12 px-8 bg-finance-green hover:bg-finance-green/90 text-white"
+              className="rounded-full text-base h-12 px-8 bg-finance-orange hover:bg-finance-orange/90 text-white"
             >
               <Link to="/signup">Start Free Trial</Link>
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="rounded-full text-base h-12 px-8 border-finance-green text-finance-green hover:bg-finance-green/10"
+              className="rounded-full text-base h-12 px-8 border-finance-green text-finance-green hover:bg-finance-orange/10"
             >
               <Link to="/contact">Contact Us</Link>
             </Button>

@@ -10,7 +10,7 @@ const NotFound = () => {
 
   useEffect(() => {
     // Update document title
-    document.title = "Page Not Found - SmartCity Finance Hub";
+    document.title = "Page Not Found - SquirrelHub";
     
     console.error(
       "404 Error: User attempted to access non-existent route:",
@@ -29,7 +29,7 @@ const NotFound = () => {
           </p>
           <Button 
             size="lg" 
-            className="rounded-full px-8 animate-slide-down [animation-delay:200ms] bg-finance-green hover:bg-finance-green/90" 
+            className="rounded-full px-8 animate-slide-down [animation-delay:200ms] bg-finance-orange hover:bg-finance-orange/90"
             asChild
           >
             <Link to="/">Return to Homepage</Link>

@@ -208,7 +208,7 @@ const Courses = () => {
                   </CardContent>
                   <CardFooter>
                     <Button 
-                      className={`w-full ${course.enrolled ? "bg-finance-green hover:bg-finance-green/90" : ""}`}
+                      className={`w-full ${course.enrolled ? "bg-finance-orange hover:bg-finance-orange/90" : ""}`}
                       variant={course.enrolled ? "default" : "outline"}
                       asChild
                     >
@@ -255,7 +255,7 @@ const Courses = () => {
                     </CardContent>
                     <CardFooter>
                       <Button 
-                        className="w-full bg-finance-green hover:bg-finance-green/90"
+                        className="w-full bg-finance-orange hover:bg-finance-orange/90"
                         asChild
                       >
                         <Link to={`/education/course/${course.id}`}>

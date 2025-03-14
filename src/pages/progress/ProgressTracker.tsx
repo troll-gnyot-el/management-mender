@@ -19,7 +19,7 @@ const ProgressTracker = () => {
   
   useEffect(() => {
     // Update document title
-    document.title = "Progress Tracker - SmartCity Finance Hub";
+    document.title = "Progress Tracker - SquirrelHub";
     
     // Load courses
     setActiveCourses(educationService.getActiveCourses());
@@ -102,7 +102,7 @@ const ProgressTracker = () => {
               </div>
               
               <div className="flex items-center gap-4">
-                <div className="bg-finance-green/20 p-3 rounded-full">
+                <div className="bg-finance-orange/20 p-3 rounded-full">
                   <Trophy className="h-6 w-6 text-finance-green" />
                 </div>
                 <div>
@@ -238,7 +238,7 @@ const ProgressTracker = () => {
                   <ChevronRight className="h-5 w-5 text-muted-foreground" />
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="bg-finance-green/20 p-2 rounded-full">
+                  <div className="bg-finance-orange/20 p-2 rounded-full">
                     <Trophy className="h-5 w-5 text-finance-green" />
                   </div>
                   <div className="flex-1">

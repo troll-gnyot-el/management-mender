@@ -36,9 +36,9 @@ const Header = () => {
           to="/" 
           className="flex items-center hover:opacity-80 transition-opacity"
         >
-          <img src="/lovable-uploads/e73cbd58-454a-4c2f-a064-6ffbe00f777e.png" alt="SquirrelBank" className="h-10 w-10 mr-2" />
-          <span className="font-display text-xl font-bold text-brand-green">
-            SquirrelBank
+          <img src="/lovable-uploads/e73cbd58-454a-4c2f-a064-6ffbe00f777e.png" alt="SquirrelHub" className="h-10 w-10 mr-2" />
+          <span className="font-display text-xl font-bold text-brand-orange">
+            SquirrelHub
           </span>
         </Link>
         
@@ -54,7 +54,7 @@ const Header = () => {
             <Link
               key={item.name}
               to={item.path}
-              className="text-sm font-medium text-muted-foreground hover:text-brand-green transition-colors"
+              className="text-sm font-medium text-muted-foreground hover:text-brand-orange transition-colors"
             >
               {item.name}
             </Link>
@@ -62,17 +62,17 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="ghost" size="sm" className="text-brand-green hover:text-brand-green hover:bg-brand-green/10" asChild>
+          <Button variant="ghost" size="sm" className="text-brand-orange hover:text-brand-orange hover:bg-brand-orange/10" asChild>
             <Link to="/login">Log In</Link>
           </Button>
-          <Button size="sm" className="bg-brand-green hover:bg-brand-green/90 text-white rounded-full" asChild>
+          <Button size="sm" className="bg-brand-orange hover:bg-brand-orange/90 text-white rounded-full" asChild>
             <Link to="/signup">Sign Up</Link>
           </Button>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-brand-green"
+          className="md:hidden p-2 text-brand-orange"
           onClick={toggleMobileMenu}
           aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
         >
@@ -94,7 +94,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className="text-lg font-medium py-2 px-4 hover:bg-brand-green/10 rounded-md"
+                className="text-lg font-medium py-2 px-4 hover:bg-brand-orange/10 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
@@ -102,10 +102,10 @@ const Header = () => {
             ))}
           </nav>
           <div className="mt-6 flex flex-col space-y-3 px-4">
-            <Button variant="outline" className="w-full border-brand-green text-brand-green" asChild>
+            <Button variant="outline" className="w-full border-brand-green text-brand-orange" asChild>
               <Link to="/login" onClick={() => setMobileMenuOpen(false)}>Log In</Link>
             </Button>
-            <Button className="w-full bg-brand-green hover:bg-brand-green/90 text-white" asChild>
+            <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white" asChild>
               <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>Sign Up</Link>
             </Button>
           </div>

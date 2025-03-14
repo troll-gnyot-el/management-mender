@@ -35,7 +35,7 @@ const FinancialEducation = () => {
       icon: <TrendingUp className="h-6 w-6" />,
       progress: 40,
       color: "finance-green",
-      bgcolor: "bg-finance-green/20",
+      bgcolor: "bg-finance-orange/20",
       borderColor: "border-finance-green"
     },
     {
@@ -140,7 +140,7 @@ const FinancialEducation = () => {
         <div className="text-center">
           <Button 
             size="lg" 
-            className="rounded-full bg-finance-green hover:bg-finance-green/90 text-white"
+            className="rounded-full bg-finance-orange hover:bg-finance-orange/90 text-white"
           >
             <Link to="/education/all">
               Explore All Courses
