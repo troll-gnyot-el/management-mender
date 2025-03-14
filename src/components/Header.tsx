@@ -48,7 +48,7 @@ const Header = () => {
             { name: "Home", path: "/" },
             { name: "Accounts", path: "/accounts" },
             { name: "Finances", path: "/finances" },
-            { name: "Education", path: "/education" },
+            { name: "Education", path: "/education/courses" },
             { name: "City Services", path: "/city-services" },
           ].map((item) => (
             <Link
@@ -88,7 +88,7 @@ const Header = () => {
               { name: "Home", path: "/" },
               { name: "Accounts", path: "/accounts" },
               { name: "Finances", path: "/finances" },
-              { name: "Education", path: "/education" },
+              { name: "Education", path: "/education/courses" },
               { name: "City Services", path: "/city-services" },
             ].map((item) => (
               <Link
