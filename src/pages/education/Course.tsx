@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
-import { educationService, Course as CourseType } from "@/services/educationService";
+import { educationService, Course as CourseType, Lesson } from "@/services/educationService";
 
 const Course = () => {
   const { courseId } = useParams();
@@ -115,7 +115,7 @@ const Course = () => {
     }, 2000);
   };
 
-  const getLessonIcon = (type: string) => {
+  const getLessonIcon = (type: 'video' | 'document' | 'exercise' | 'quiz') => {
     switch (type) {
       case "video":
         return <Play className="h-4 w-4" />;

@@ -27,7 +27,7 @@ export type Course = {
 };
 
 // Active courses data
-const activeCourses = [
+const activeCourses: Course[] = [
   {
     id: 1,
     title: "Budgeting Basics",
