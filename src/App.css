@@ -19,3 +19,49 @@
 .text-balance {
   text-wrap: balance;
 }
+
+/* Wood pattern background overlay */
+.wood-bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/lovable-uploads/874f19d1-d4f6-4ece-a31b-2f286fb88714.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px) brightness(0.6);
+  z-index: -1;
+}
+
+/* Glass panel styling */
+.glass-panel-container {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Sidebar container */
+.sidebar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  z-index: 40;
+}
+
+/* Content with sidebar */
+.content-with-sidebar {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+}
+
+@media (max-width: 768px) {
+  .content-with-sidebar {
+    margin-left: 0;
+    width: 100%;
+  }
+}

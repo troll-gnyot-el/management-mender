@@ -5,21 +5,21 @@ import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
-    quote: "Эта система полностью изменила то, как мы управляем нашими проектами. Всё стало гораздо эффективнее и понятнее.",
-    author: "Екатерина Смирнова",
+    quote: "This system has completely changed how we manage our projects. Everything has become much more efficient and clearer.",
+    author: "Catherine Smith",
     role: "CEO, TechVision",
     image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=220&q=80"
   },
   {
-    quote: "Мы увеличили продуктивность на 40% в первый месяц использования. Это невероятный результат.",
-    author: "Михаил Петров",
-    role: "CTO, Инновейт",
+    quote: "We increased productivity by 40% in the first month of use. This is an incredible result.",
+    author: "Michael Peterson",
+    role: "CTO, Innovate",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=220&q=80"
   },
   {
-    quote: "Интуитивный интерфейс и мощная аналитика — именно то, что было нужно нашей компании для роста.",
-    author: "Анна Иванова",
-    role: "COO, ФинТех Групп",
+    quote: "Intuitive interface and powerful analytics — exactly what our company needed for growth.",
+    author: "Anna Johnson",
+    role: "COO, FinTech Group",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=220&q=80"
   },
 ];
@@ -54,10 +54,10 @@ const Testimonials = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Что говорят наши клиенты
+              What Our Clients Say
             </h2>
             <p className="text-muted-foreground text-lg">
-              Отзывы от компаний, которые трансформировали свой бизнес с нашей системой
+              Testimonials from companies that have transformed their business with our system
             </p>
           </div>
           

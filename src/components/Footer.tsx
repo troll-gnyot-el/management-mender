@@ -11,10 +11,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <Link to="/" className="font-display text-2xl font-medium mb-4 inline-block">
-              Управление
+              Management
             </Link>
             <p className="text-muted-foreground mb-4">
-              Инновационная система управления для современного бизнеса
+              Innovative management system for modern business
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-muted-foreground hover:text-foreground">
@@ -33,9 +33,9 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="font-medium text-lg mb-4">Компания</h3>
+            <h3 className="font-medium text-lg mb-4">Company</h3>
             <ul className="space-y-2">
-              {['О нас', 'Команда', 'Карьера', 'Блог', 'Контакты'].map((item) => (
+              {['About Us', 'Team', 'Careers', 'Blog', 'Contact'].map((item) => (
                 <li key={item}>
                   <Link to="#" className="text-muted-foreground hover:text-foreground">
                     {item}
@@ -46,9 +46,9 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="font-medium text-lg mb-4">Продукт</h3>
+            <h3 className="font-medium text-lg mb-4">Product</h3>
             <ul className="space-y-2">
-              {['Возможности', 'Интеграции', 'Цены', 'FAQ', 'Безопасность'].map((item) => (
+              {['Features', 'Integrations', 'Pricing', 'FAQ', 'Security'].map((item) => (
                 <li key={item}>
                   <Link to="#" className="text-muted-foreground hover:text-foreground">
                     {item}
@@ -59,12 +59,12 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="font-medium text-lg mb-4">Контакты</h3>
+            <h3 className="font-medium text-lg mb-4">Contact</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 mr-2 text-muted-foreground" />
                 <span className="text-muted-foreground">
-                  ул. Ленина 123, Москва, Россия
+                  123 Lenin St, Moscow, Russia
                 </span>
               </li>
               <li className="flex items-center">
@@ -85,14 +85,14 @@ const Footer = () => {
         
         <div className="border-t border-border/50 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm">
-            © {year} Управление. Все права защищены.
+            © {year} Management. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6">
             <Link to="#" className="text-sm text-muted-foreground hover:text-foreground">
-              Политика конфиденциальности
+              Privacy Policy
             </Link>
             <Link to="#" className="text-sm text-muted-foreground hover:text-foreground">
-              Условия использования
+              Terms of Use
             </Link>
           </div>
         </div>
