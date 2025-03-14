@@ -10,6 +10,8 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Course from "./pages/education/Course";
 import Courses from "./pages/education/Courses";
+import ProgressTracker from "./pages/progress/ProgressTracker";
+import FinanceTracker from "./pages/finance/FinanceTracker";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,8 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/education/courses" element={<Courses />} />
           <Route path="/education/course/:courseId" element={<Course />} />
+          <Route path="/progress" element={<ProgressTracker />} />
+          <Route path="/finance" element={<FinanceTracker />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

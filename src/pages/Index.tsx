@@ -7,7 +7,7 @@ import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
-// Анимированный скролл при загрузке страницы
+// Smooth scroll on page load
 import { useEffect } from "react";
 
 const Index = () => {
@@ -16,10 +16,13 @@ const Index = () => {
       top: 0,
       behavior: "smooth",
     });
+    
+    // Update document title
+    document.title = "SmartCity Finance Hub - Financial Education";
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col wood-pattern">
       <Header />
       <main className="flex-grow">
         <Hero />

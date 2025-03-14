@@ -10,7 +10,10 @@ import {
   Settings, 
   TrendingUp, 
   User, 
-  X 
+  X,
+  BarChart2,
+  GraduationCap,
+  CreditCard
 } from "lucide-react";
 
 import {
@@ -68,17 +71,17 @@ const Dashboard = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full flex-col md:flex-row bg-muted/10">
+      <div className="min-h-screen flex w-full flex-col md:flex-row bg-wood-light/20">
         {/* Sidebar for desktop */}
         <Sidebar>
           <SidebarHeader>
             <div className="flex items-center p-2">
               <img 
                 src="/lovable-uploads/e73cbd58-454a-4c2f-a064-6ffbe00f777e.png" 
-                alt="SquirrelBank" 
+                alt="SmartCity Finance Hub" 
                 className="h-8 w-8 mr-2" 
               />
-              <span className="font-bold text-lg">SquirrelBank</span>
+              <span className="font-bold text-lg text-finance-brown">SmartCity Finance</span>
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -97,16 +100,24 @@ const Dashboard = () => {
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
                       <Link to="/education/courses">
-                        <BookOpen />
+                        <GraduationCap />
                         <span>Education</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild>
-                      <Link to="/finances">
-                        <TrendingUp />
-                        <span>Finances</span>
+                      <Link to="/progress">
+                        <BarChart2 />
+                        <span>Progress Tracker</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <Link to="/finance">
+                        <CreditCard />
+                        <span>Finance Tracker</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -180,16 +191,24 @@ const Dashboard = () => {
                 className="flex items-center p-2 rounded-md hover:bg-muted"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <BookOpen className="mr-2 h-5 w-5" />
+                <GraduationCap className="mr-2 h-5 w-5" />
                 <span>Education</span>
               </Link>
               <Link 
-                to="/finances" 
+                to="/progress" 
                 className="flex items-center p-2 rounded-md hover:bg-muted"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <TrendingUp className="mr-2 h-5 w-5" />
-                <span>Finances</span>
+                <BarChart2 className="mr-2 h-5 w-5" />
+                <span>Progress Tracker</span>
+              </Link>
+              <Link 
+                to="/finance" 
+                className="flex items-center p-2 rounded-md hover:bg-muted"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <CreditCard className="mr-2 h-5 w-5" />
+                <span>Finance Tracker</span>
               </Link>
               <Link 
                 to="/profile" 
@@ -233,14 +252,14 @@ const Dashboard = () => {
         )}
 
         {/* Main content */}
-        <div className="flex-1 p-4 md:p-8">
+        <div className="flex-1 p-4 md:p-8 wood-pattern">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Welcome, Alex</h1>
+            <h1 className="text-3xl font-bold mb-2">Welcome to SmartCity Finance Hub</h1>
             <p className="text-muted-foreground">Here's an overview of your financial education progress</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <Card>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <Card className="bg-wood-light/50 border-wood-medium/30">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg">Overall Progress</CardTitle>
               </CardHeader>
@@ -250,22 +269,26 @@ const Dashboard = () => {
                   <span className="text-sm font-medium">3/8 Courses</span>
                 </div>
                 <Progress value={38} className="h-2" />
+                <Button variant="link" size="sm" className="mt-2 px-0" asChild>
+                  <Link to="/progress">View Detailed Progress</Link>
+                </Button>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="bg-wood-light/50 border-wood-medium/30">
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg">Certificates Earned</CardTitle>
+                <CardTitle className="text-lg">Finance Status</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold">1</span>
+                  <span className="text-3xl font-bold">$5,280</span>
                   <Button variant="outline" size="sm" asChild>
-                    <Link to="/certificates">View All</Link>
+                    <Link to="/finance">Manage Finances</Link>
                   </Button>
                 </div>
+                <p className="text-sm text-muted-foreground mt-2">Total balance across accounts</p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="bg-wood-light/50 border-wood-medium/30">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg">Learning Streak</CardTitle>
               </CardHeader>
@@ -283,14 +306,15 @@ const Dashboard = () => {
                     ))}
                   </div>
                 </div>
+                <p className="text-sm text-muted-foreground mt-2">Keep learning to maintain your streak!</p>
               </CardContent>
             </Card>
           </div>
 
-          <h2 className="text-2xl font-bold mb-4">Your Courses</h2>
+          <h2 className="text-2xl font-bold mb-4">Your Active Courses</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {courses.map((course) => (
-              <Card key={course.id} className="overflow-hidden">
+              <Card key={course.id} className="overflow-hidden bg-white/90 hover:shadow-md transition-shadow">
                 <div className={`h-2 bg-${course.color}`} />
                 <CardHeader>
                   <CardTitle className="text-lg">{course.title}</CardTitle>
@@ -306,7 +330,7 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
             ))}
-            <Card className="border-dashed">
+            <Card className="border-dashed hover:shadow-md transition-shadow bg-white/90">
               <CardContent className="flex flex-col items-center justify-center h-full py-8">
                 <p className="text-muted-foreground mb-4">Discover more courses</p>
                 <Button asChild>
