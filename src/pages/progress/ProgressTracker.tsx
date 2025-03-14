@@ -6,64 +6,31 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { educationService } from "@/services/educationService";
 
 const ProgressTracker = () => {
   const [activeCourses, setActiveCourses] = useState([]);
   const [completedCourses, setCompletedCourses] = useState([]);
+  const [overallProgress, setOverallProgress] = useState({
+    progress: 0,
+    completedLessons: 0,
+    totalLessons: 0
+  });
   
   useEffect(() => {
     // Update document title
     document.title = "Progress Tracker - SmartCity Finance Hub";
     
-    // In a real app, this would fetch from an API
-    setActiveCourses([
-      {
-        id: 1,
-        title: "Budgeting Basics",
-        progress: 85,
-        lastActivity: "3 days ago",
-        totalModules: 3,
-        completedModules: 2,
-        color: "finance-yellow"
-      },
-      {
-        id: 2,
-        title: "Smart Saving",
-        progress: 65,
-        lastActivity: "1 week ago",
-        totalModules: 4,
-        completedModules: 3,
-        color: "finance-orange"
-      },
-      {
-        id: 3,
-        title: "Investing Fundamentals",
-        progress: 40,
-        lastActivity: "2 days ago",
-        totalModules: 5,
-        completedModules: 2,
-        color: "finance-green"
-      }
-    ]);
+    // Load courses
+    setActiveCourses(educationService.getActiveCourses());
+    setCompletedCourses(educationService.getCompletedCourses());
     
-    setCompletedCourses([
-      {
-        id: 4,
-        title: "Financial Basics 101",
-        completedDate: "April 15, 2023",
-        score: 92,
-        color: "finance-coral"
-      }
-    ]);
+    // Calculate overall progress
+    setOverallProgress(educationService.calculateOverallProgress());
   }, []);
 
-  // Calculate overall progress
-  const totalModules = activeCourses.reduce((total, course) => total + course.totalModules, 0);
-  const completedModules = activeCourses.reduce((total, course) => total + course.completedModules, 0);
-  const overallProgress = totalModules > 0 ? Math.round((completedModules / totalModules) * 100) : 0;
-
   return (
-    <div className="min-h-screen bg-muted/10 finance-pattern pb-12">
+    <div className="min-h-screen bg-muted/10 wood-pattern pb-12">
       {/* Header */}
       <div className="bg-wood-light/50 py-8 border-b border-wood-medium/30">
         <div className="container mx-auto px-4">
@@ -87,16 +54,16 @@ const ProgressTracker = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Progress overview section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          <Card className="md:col-span-2">
+          <Card className="md:col-span-2 bg-white/80">
             <CardHeader className="pb-2">
               <CardTitle>Overall Learning Progress</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-muted-foreground">{overallProgress}% Complete</span>
-                <span className="font-medium">{completedModules} of {totalModules} modules</span>
+                <span className="text-muted-foreground">{overallProgress.progress}% Complete</span>
+                <span className="font-medium">{overallProgress.completedLessons} of {overallProgress.totalLessons} lessons</span>
               </div>
-              <Progress value={overallProgress} className="h-3 mb-6" />
+              <Progress value={overallProgress.progress} className="h-3 mb-6" />
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                 <div className="bg-muted/50 p-4 rounded-lg">
@@ -108,8 +75,8 @@ const ProgressTracker = () => {
                   <div className="text-sm text-muted-foreground">Completed Courses</div>
                 </div>
                 <div className="bg-muted/50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold">{completedModules}</div>
-                  <div className="text-sm text-muted-foreground">Modules Completed</div>
+                  <div className="text-2xl font-bold">{overallProgress.completedLessons}</div>
+                  <div className="text-sm text-muted-foreground">Lessons Completed</div>
                 </div>
                 <div className="bg-muted/50 p-4 rounded-lg">
                   <div className="text-2xl font-bold">5</div>
@@ -159,7 +126,7 @@ const ProgressTracker = () => {
           <TabsContent value="active" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {activeCourses.map((course) => (
-                <Card key={course.id} className="overflow-hidden">
+                <Card key={course.id} className="overflow-hidden bg-white/80">
                   <div className={`h-2 bg-${course.color}`} />
                   <CardHeader>
                     <CardTitle>{course.title}</CardTitle>
@@ -167,13 +134,15 @@ const ProgressTracker = () => {
                   <CardContent>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-muted-foreground">{course.progress}% complete</span>
-                      <span className="text-sm">Last activity: {course.lastActivity}</span>
+                      <span className="text-sm">Last activity: 3 days ago</span>
                     </div>
                     <Progress value={course.progress} className="h-2 mb-4" />
                     
                     <div className="flex justify-between items-center">
                       <span className="text-sm">
-                        {course.completedModules} of {course.totalModules} modules
+                        {course.modules.reduce((sum, module) => {
+                          return sum + module.lessons.filter(lesson => lesson.completed).length;
+                        }, 0)} of {course.modules.reduce((sum, module) => sum + module.lessons.length, 0)} lessons
                       </span>
                       <Button size="sm" asChild>
                         <Link to={`/education/course/${course.id}`}>
@@ -191,7 +160,7 @@ const ProgressTracker = () => {
             {completedCourses.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {completedCourses.map((course) => (
-                  <Card key={course.id} className="overflow-hidden">
+                  <Card key={course.id} className="overflow-hidden bg-white/80">
                     <div className={`h-2 bg-${course.color}`} />
                     <CardHeader>
                       <div className="flex justify-between items-center">
@@ -220,7 +189,7 @@ const ProgressTracker = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-10">
+              <div className="text-center py-10 bg-white/80 rounded-lg">
                 <div className="bg-muted/50 inline-flex p-3 rounded-full mb-4">
                   <Trophy className="h-6 w-6 text-muted-foreground" />
                 </div>
@@ -239,7 +208,7 @@ const ProgressTracker = () => {
         {/* Learning activity section */}
         <div className="mt-12">
           <h2 className="text-2xl font-bold mb-6">Recent Learning Activity</h2>
-          <Card>
+          <Card className="bg-white/80">
             <CardContent className="p-6">
               <ul className="space-y-4">
                 <li className="flex items-start gap-4 pb-4 border-b">

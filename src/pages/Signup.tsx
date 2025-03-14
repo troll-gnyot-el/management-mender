@@ -16,7 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { useAuth } from "@/services/authService";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -26,8 +26,9 @@ const formSchema = z.object({
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const { signup } = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,27 +39,25 @@ const Signup = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // This is where you would normally handle registration
-    console.log(values);
-    
-    // For demo purposes, we'll just show a success message and redirect
-    toast({
-      title: "Account created",
-      description: "Welcome to SquirrelBank! We're excited to have you.",
-    });
-    
-    // Redirect to dashboard after successful registration
-    setTimeout(() => navigate("/dashboard"), 1000);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setIsLoading(true);
+      await signup(values.name, values.email, values.password);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Signup error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col wood-pattern">
       <div className="flex-grow flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md space-y-8">
+        <div className="w-full max-w-md space-y-8 bg-white/80 p-8 rounded-xl shadow-lg">
           <div className="text-center">
             <Link to="/" className="inline-block">
-              <img src="/lovable-uploads/e73cbd58-454a-4c2f-a064-6ffbe00f777e.png" alt="SquirrelBank" className="h-16 w-16 mx-auto" />
+              <img src="/lovable-uploads/e73cbd58-454a-4c2f-a064-6ffbe00f777e.png" alt="SmartCity Finance Hub" className="h-16 w-16 mx-auto" />
             </Link>
             <h2 className="mt-6 text-3xl font-bold tracking-tight text-finance-brown">
               Create a new account
@@ -151,8 +150,9 @@ const Signup = () => {
               <Button
                 type="submit"
                 className="w-full bg-finance-green hover:bg-finance-green/90 text-white"
+                disabled={isLoading}
               >
-                Create account
+                {isLoading ? "Creating account..." : "Create account"}
               </Button>
             </form>
           </Form>
@@ -163,7 +163,7 @@ const Signup = () => {
                 <div className="w-full border-t border-muted" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="bg-background px-2 text-muted-foreground">
+                <span className="bg-white px-2 text-muted-foreground">
                   Or continue with
                 </span>
               </div>

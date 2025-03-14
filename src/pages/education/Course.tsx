@@ -1,107 +1,93 @@
 
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, CheckCircle, Circle, Clock, Download, FileText, Lock, Play, Trophy } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { 
+  ArrowLeft, 
+  CheckCircle, 
+  Circle, 
+  Clock, 
+  Download, 
+  FileText, 
+  Lock, 
+  Play, 
+  Trophy 
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
+import { educationService, Course as CourseType } from "@/services/educationService";
 
 const Course = () => {
   const { courseId } = useParams();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [activeModule, setActiveModule] = useState(0);
-  const [completedLessons, setCompletedLessons] = useState<number[]>([0, 1]);
+  const [completedLessons, setCompletedLessons] = useState<number[]>([]);
+  const [course, setCourse] = useState<CourseType | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Mock course data
-  const course = {
-    id: courseId || "1",
-    title: "Budgeting Basics",
-    description: "Learn the fundamentals of creating and managing a personal budget",
-    instructor: "Sarah Johnson",
-    duration: "3 hours",
-    modules: [
-      {
-        title: "Introduction to Budgeting",
-        lessons: [
-          {
-            title: "What is a Budget?",
-            duration: "10 min",
-            type: "video"
-          },
-          {
-            title: "The Importance of Budgeting",
-            duration: "8 min",
-            type: "video"
-          },
-          {
-            title: "Common Budgeting Myths",
-            duration: "12 min",
-            type: "video"
-          }
-        ]
-      },
-      {
-        title: "Creating Your First Budget",
-        lessons: [
-          {
-            title: "Step 1: Tracking Income",
-            duration: "15 min",
-            type: "video"
-          },
-          {
-            title: "Step 2: Identifying Expenses",
-            duration: "20 min",
-            type: "video"
-          },
-          {
-            title: "Budget Worksheet",
-            duration: "5 min",
-            type: "document"
-          },
-          {
-            title: "Practice Exercise",
-            duration: "30 min",
-            type: "exercise"
-          }
-        ]
-      },
-      {
-        title: "Sticking to Your Budget",
-        lessons: [
-          {
-            title: "Setting Realistic Goals",
-            duration: "12 min",
-            type: "video"
-          },
-          {
-            title: "Dealing with Unexpected Expenses",
-            duration: "14 min",
-            type: "video"
-          },
-          {
-            title: "Monthly Review Process",
-            duration: "10 min",
-            type: "video"
-          },
-          {
-            title: "Final Assessment",
-            duration: "25 min",
-            type: "quiz"
-          }
-        ]
+  useEffect(() => {
+    if (courseId) {
+      const foundCourse = educationService.getCourseById(courseId);
+      if (foundCourse) {
+        setCourse(foundCourse);
+        
+        // Get all completed lessons
+        const completed: number[] = [];
+        foundCourse.modules.forEach(module => {
+          module.lessons.forEach(lesson => {
+            if (lesson.completed) {
+              completed.push(lesson.id);
+            }
+          });
+        });
+        setCompletedLessons(completed);
+        
+        // Update document title
+        document.title = `${foundCourse.title} - SmartCity Finance Hub`;
+      } else {
+        toast({
+          title: "Course not found",
+          description: "The requested course could not be found.",
+          variant: "destructive"
+        });
+        navigate("/education/courses");
       }
-    ]
-  };
+    }
+    setLoading(false);
+  }, [courseId, toast, navigate]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-center">
+          <p className="text-lg">Loading course...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!course) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-xl font-bold mb-2">Course not found</h2>
+          <Button asChild>
+            <Link to="/education/courses">Browse Courses</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   // Calculate progress
   const totalLessons = course.modules.reduce((acc, module) => acc + module.lessons.length, 0);
   const progress = Math.round((completedLessons.length / totalLessons) * 100);
 
-  const markLessonComplete = (moduleIndex: number, lessonIndex: number) => {
-    const lessonId = moduleIndex * 10 + lessonIndex;
+  const markLessonComplete = (lessonId: number) => {
     if (!completedLessons.includes(lessonId)) {
       setCompletedLessons([...completedLessons, lessonId]);
       
@@ -112,7 +98,7 @@ const Course = () => {
     }
   };
 
-  const handleStartLesson = (moduleIndex: number, lessonIndex: number) => {
+  const handleStartLesson = (moduleIndex: number, lessonIndex: number, lessonId: number) => {
     setActiveModule(moduleIndex);
     
     // In a real app, this would navigate to the lesson content
@@ -120,6 +106,13 @@ const Course = () => {
       title: "Starting lesson",
       description: `Loading: ${course.modules[moduleIndex].lessons[lessonIndex].title}`,
     });
+    
+    // Auto-mark as started/viewed after a delay
+    setTimeout(() => {
+      if (!completedLessons.includes(lessonId)) {
+        markLessonComplete(lessonId);
+      }
+    }, 2000);
   };
 
   const getLessonIcon = (type: string) => {
@@ -137,10 +130,25 @@ const Course = () => {
     }
   };
 
+  // Check if a lesson is locked (previous module not completed)
+  const isLessonLocked = (moduleIndex: number, lessonIndex: number) => {
+    if (moduleIndex === 0) return false;
+    
+    // Check if all lessons in previous module are completed
+    const previousModule = course.modules[moduleIndex - 1];
+    if (!previousModule) return false;
+    
+    const allPreviousCompleted = previousModule.lessons.every(lesson => 
+      completedLessons.includes(lesson.id)
+    );
+    
+    return !allPreviousCompleted;
+  };
+
   return (
-    <div className="min-h-screen bg-muted/10 pb-12">
+    <div className="min-h-screen bg-muted/10 wood-pattern pb-12">
       {/* Header */}
-      <div className="bg-finance-yellow/20 py-8">
+      <div className="bg-finance-yellow/20 py-8 border-b border-finance-yellow/30">
         <div className="container mx-auto px-4">
           <Button variant="ghost" size="sm" asChild className="mb-4">
             <Link to="/dashboard" className="flex items-center">
@@ -159,7 +167,27 @@ const Course = () => {
                 <Download className="h-4 w-4" />
                 Materials
               </Button>
-              <Button className="bg-finance-green hover:bg-finance-green/90 text-white">
+              <Button 
+                className="bg-finance-green hover:bg-finance-green/90 text-white"
+                onClick={() => {
+                  // Find first incomplete lesson
+                  for (let i = 0; i < course.modules.length; i++) {
+                    const moduleIndex = i;
+                    const module = course.modules[i];
+                    
+                    for (let j = 0; j < module.lessons.length; j++) {
+                      const lessonIndex = j;
+                      const lesson = module.lessons[j];
+                      
+                      if (!completedLessons.includes(lesson.id) && !isLessonLocked(moduleIndex, lessonIndex)) {
+                        setActiveModule(moduleIndex);
+                        handleStartLesson(moduleIndex, lessonIndex, lesson.id);
+                        break;
+                      }
+                    }
+                  }
+                }}
+              >
                 Continue Learning
               </Button>
             </div>
@@ -194,7 +222,7 @@ const Course = () => {
           
           <TabsContent value="content" className="space-y-8">
             {course.modules.map((module, moduleIndex) => (
-              <Card key={moduleIndex} className="overflow-hidden">
+              <Card key={moduleIndex} className="overflow-hidden bg-white/80">
                 <div className={`p-4 ${activeModule === moduleIndex ? 'bg-finance-yellow/20' : ''}`}>
                   <button 
                     className="flex justify-between items-center w-full font-medium text-left"
@@ -211,9 +239,8 @@ const Course = () => {
                   <CardContent className="pt-6">
                     <ul className="space-y-4">
                       {module.lessons.map((lesson, lessonIndex) => {
-                        const lessonId = moduleIndex * 10 + lessonIndex;
-                        const isCompleted = completedLessons.includes(lessonId);
-                        const isLocked = moduleIndex > 0 && !completedLessons.includes((moduleIndex - 1) * 10 + course.modules[moduleIndex - 1].lessons.length - 1);
+                        const isCompleted = completedLessons.includes(lesson.id);
+                        const isLocked = isLessonLocked(moduleIndex, lessonIndex);
                         
                         return (
                           <li key={lessonIndex} className="flex items-center justify-between">
@@ -247,7 +274,7 @@ const Course = () => {
                                 size="sm" 
                                 variant={isCompleted ? "ghost" : "outline"} 
                                 disabled={isLocked}
-                                onClick={() => handleStartLesson(moduleIndex, lessonIndex)}
+                                onClick={() => handleStartLesson(moduleIndex, lessonIndex, lesson.id)}
                               >
                                 {isCompleted ? "Review" : "Start"}
                               </Button>
@@ -255,7 +282,7 @@ const Course = () => {
                                 <Button 
                                   size="sm" 
                                   variant="ghost" 
-                                  onClick={() => markLessonComplete(moduleIndex, lessonIndex)}
+                                  onClick={() => markLessonComplete(lesson.id)}
                                 >
                                   Mark Complete
                                 </Button>
@@ -272,7 +299,7 @@ const Course = () => {
           </TabsContent>
           
           <TabsContent value="overview">
-            <Card>
+            <Card className="bg-white/80">
               <CardContent className="pt-6">
                 <div className="prose max-w-none">
                   <h3>About this course</h3>
@@ -302,7 +329,7 @@ const Course = () => {
           </TabsContent>
           
           <TabsContent value="notes">
-            <Card>
+            <Card className="bg-white/80">
               <CardContent className="pt-6">
                 <div className="text-center py-8">
                   <p className="text-muted-foreground mb-4">
