@@ -69,6 +69,15 @@ export default {
 					orange: '#FF8C42',
 					brown: '#8B4513',
 				},
+				// New finance education colors
+				finance: {
+					yellow: '#F4DDB8',
+					brown: '#90533B',
+					orange: '#DA983C',
+					green: '#495235',
+					coral: '#B87B5C',
+					sage: '#8F9562',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

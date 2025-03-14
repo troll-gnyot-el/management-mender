@@ -1,36 +1,36 @@
 
-import { Check, BarChart3, Users, ShieldCheck, Zap, Globe } from "lucide-react";
+import { BarChart3, Users, ShieldCheck, Zap, Globe, Book } from "lucide-react";
 
 const features = [
   {
     icon: <BarChart3 className="h-6 w-6" />,
-    title: "Аналитика в реальном времени",
-    description: "Получайте актуальные данные о производительности и принимайте информированные решения быстрее.",
+    title: "Real-time Analytics",
+    description: "Get up-to-date data about your spending habits and make informed decisions faster.",
   },
   {
-    icon: <Users className="h-6 w-6" />,
-    title: "Управление командой",
-    description: "Оптимизируйте рабочие процессы и повышайте продуктивность вашей команды.",
+    icon: <Book className="h-6 w-6" />,
+    title: "Financial Education",
+    description: "Learn essential financial skills through our interactive courses and practical exercises.",
   },
   {
     icon: <ShieldCheck className="h-6 w-6" />,
-    title: "Безопасность на первом месте",
-    description: "Шифрование данных корпоративного уровня и многофакторная аутентификация.",
+    title: "Security First",
+    description: "Enterprise-level data encryption and multi-factor authentication for your peace of mind.",
   },
   {
     icon: <Zap className="h-6 w-6" />,
-    title: "Молниеносная скорость",
-    description: "Оптимизированная производительность для мгновенного доступа к данным.",
+    title: "Lightning Fast",
+    description: "Optimized performance for instant access to your financial data anytime, anywhere.",
   },
   {
     icon: <Globe className="h-6 w-6" />,
-    title: "Глобальная доступность",
-    description: "Доступ к системе из любой точки мира на любом устройстве.",
+    title: "Global Accessibility",
+    description: "Access your finances from anywhere in the world on any device.",
   },
   {
-    icon: <Check className="h-6 w-6" />,
-    title: "Интуитивно понятный интерфейс",
-    description: "Минимальная кривая обучения благодаря простому и понятному дизайну.",
+    icon: <Users className="h-6 w-6" />,
+    title: "Family Sharing",
+    description: "Share selected financial information with family members while maintaining privacy.",
   },
 ];
 
@@ -40,10 +40,10 @@ const Features = () => {
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Разработано для повышения эффективности
+            Designed to Improve Your Financial Life
           </h2>
           <p className="text-muted-foreground text-lg">
-            Наша платформа предоставляет все необходимые инструменты для оптимизации бизнес-процессов
+            Our platform provides all the tools you need to take control of your finances and build a secure future
           </p>
         </div>
         
