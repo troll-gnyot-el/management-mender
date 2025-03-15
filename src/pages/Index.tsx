@@ -15,7 +15,7 @@ const Index = () => {
     });
     
     // Update document title
-    document.title = "SmartCity Finance Hub - Financial Education";
+    document.title = "SquirrelHub - Financial Education";
   }, []);
 
   return (

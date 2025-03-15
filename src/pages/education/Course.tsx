@@ -47,7 +47,7 @@ const Course = () => {
         setCompletedLessons(completed);
         
         // Update document title
-        document.title = `${foundCourse.title} - SmartCity Finance Hub`;
+        document.title = `${foundCourse.title} - SquirrelHub`;
       } else {
         toast({
           title: "Course not found",

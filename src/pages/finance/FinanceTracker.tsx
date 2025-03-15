@@ -74,7 +74,7 @@ const FinanceTracker = () => {
   
   useEffect(() => {
     // Update document title
-    document.title = "Finance Tracker - SmartCity Finance Hub";
+    document.title = "Finance Tracker - SquirrelHub";
     
     // Load data
     setTransactions(financeService.getTransactions());

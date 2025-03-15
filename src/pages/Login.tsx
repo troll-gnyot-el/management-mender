@@ -55,7 +55,7 @@ const Login = () => {
         <div className="w-full max-w-md space-y-8 bg-white/80 p-8 rounded-xl shadow-lg">
           <div className="text-center">
             <Link to="/" className="inline-block">
-              <img src="/lovable-uploads/e73cbd58-454a-4c2f-a064-6ffbe00f777e.png" alt="SmartCity Finance Hub" className="h-16 w-16 mx-auto" />
+              <img src="/lovable-uploads/e73cbd58-454a-4c2f-a064-6ffbe00f777e.png" alt="SquirrelHub" className="h-16 w-16 mx-auto" />
             </Link>
             <h2 className="mt-6 text-3xl font-bold tracking-tight text-finance-brown">
               Sign in to your account

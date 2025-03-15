@@ -104,7 +104,7 @@ export const useAuth = () => {
       const user = await authService.signup(name, email, password);
       toast({
         title: "Signup successful",
-        description: `Welcome to SmartCity Finance Hub, ${user.name}!`,
+        description: `Welcome to SquirrelHub, ${user.name}!`,
       });
       return user;
     } catch (error) {

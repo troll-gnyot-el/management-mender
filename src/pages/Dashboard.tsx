@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { 
@@ -13,7 +12,6 @@ import {
   BarChart2,
   GraduationCap,
   CreditCard,
-  Calendar,
   ChevronRight
 } from "lucide-react";
 
@@ -29,7 +27,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -106,7 +103,7 @@ const Dashboard = () => {
             <div className="flex items-center p-2">
               <img 
                 src="/lovable-uploads/e73cbd58-454a-4c2f-a064-6ffbe00f777e.png" 
-                alt="SmartCity Finance Hub" 
+                alt="SquirrelHub"
                 className="h-8 w-8 mr-2" 
               />
               <span className="font-bold text-lg text-primary">SmartCity Finance</span>
@@ -280,9 +277,9 @@ const Dashboard = () => {
         )}
 
         {/* Main content - shift it to the right to avoid overlay with the sidebar */}
-        <div className="flex-1 p-4 md:p-8 md:ml-64">
+        <div className="flex-1 p-4">
           <div className="mb-8 glass-panel p-6">
-            <h1 className="text-3xl font-bold mb-2 text-black">Welcome to SmartCity Finance Hub</h1>
+            <h1 className="text-3xl font-bold mb-2 text-black">Welcome to SquirrelHub</h1>
             <p className="text-muted-foreground">Track your financial education journey</p>
           </div>
 
