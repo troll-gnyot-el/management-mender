@@ -66,7 +66,7 @@ export default {
 				// Brand colors updated for finance theme
 				brand: {
 					green: '#2E7D32',
-					orange: '#F57C00',
+					orange: '#efa860',
 					brown: '#795548',
 				},
 				// Finance education colors

@@ -20,6 +20,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col wood-pattern">
+        <div className="background"></div>
       <Header />
       <main className="flex-grow">
         <Hero />
